@@ -8,6 +8,8 @@ import { HomeComponent } from './components/home/home.component';
 import { BookmarksListComponent } from './components/bookmarks-list/bookmarks-list.component';
 import { BookmarkComponent } from './components/bookmark/bookmark.component';
 import { SearchAuthorComponent } from './components/search-author/search-author.component';
+import { AUTH_API_URL } from './app-injection-tokens';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,10 @@ import { SearchAuthorComponent } from './components/search-author/search-author.
     AppRoutingModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [{
+    provide: AUTH_API_URL,
+    useValue: environment.authApi
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
