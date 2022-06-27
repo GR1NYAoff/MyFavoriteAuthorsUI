@@ -1,1 +1,32 @@
-<p>search-author works!</p>
+<div class="container mt-4">
+  <h3>Find author:</h3>
+  <div class="row">
+    <div class="search">
+      <input
+        type="text"
+        name="search"
+        [(ngModel)]="searchText"
+        placeholder="Author Name"
+        (input)="search()"
+      />
+    </div>
+  </div>
+  <ul class="list-group mt-4">
+    <li
+      *ngFor="let author of authors | filter: searchText"
+      class="list-group-item my-2"
+    >
+      <div class="raw mt-3">
+        {{ author.authorName }}
+        <button
+          type="button"
+          class="btn btn-success mx-5 px-5 mb-2"
+          style="float: right"
+          (click)="addBookmark(author)"
+        >
+          Add Bookmark
+        </button>
+      </div>
+    </li>
+  </ul>
+</div>

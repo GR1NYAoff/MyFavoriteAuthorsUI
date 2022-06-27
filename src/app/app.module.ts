@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment';
 import { ACCESS_TOKEN_KEY } from './services/auth.service';
 
 import { JwtModule } from '@auth0/angular-jwt'
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 export function tokenGetter() {
   return localStorage.getItem(ACCESS_TOKEN_KEY);
@@ -33,6 +34,7 @@ export function tokenGetter() {
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    Ng2SearchPipeModule,
 
     JwtModule.forRoot({
       config: {

@@ -1,1 +1,29 @@
-<p>bookmarks-list works!</p>
+<div class="container">
+  <h2 class="display-7 pt-4">My Favorite Authors</h2>
+  <ul class="list-group mb-5">
+    <li *ngFor="let b of bookmarks" class="list-group-item my-2">
+      <div class="raw mt-3">
+        <b>
+          {{ b.authorName }} | Comment:
+          {{ b.comment }}
+        </b>
+        <button
+          type="button"
+          class="btn btn-success mx-5 px-5 mb-2"
+          style="float: right"
+          (click)="selectBookmark(b.bookmarkId)"
+        >
+          Select
+        </button>
+        <button
+          type="button"
+          class="btn btn-danger mx-5 px-5 mb-2"
+          style="float: right"
+          (click)="deleteBookmark(b.bookmarkId)"
+        >
+          Delete
+        </button>
+      </div>
+    </li>
+  </ul>
+</div>
