@@ -1,5 +1,5 @@
 export class BookmarkRequest {
-      authorName: string;
-      authorKey: string;
-      comment: string;
-  }
+  authorName: string;
+  authorKey: string;
+  comment: string;
+}

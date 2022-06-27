@@ -39,7 +39,7 @@ export class AuthService {
     return !this.jwtHelperService.isTokenExpired(token!);
   }
 
-  logout(): void {
+  logout(): void { 
     localStorage.removeItem(ACCESS_TOKEN_KEY);
     this.router.navigate(['home']);
   }
