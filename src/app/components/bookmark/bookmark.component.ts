@@ -12,7 +12,6 @@ import { Book } from 'src/app/models/book';
 })
 export class BookmarkComponent implements OnInit {
   books: Book[];
-  bookmark: Bookmark;
   comment: string;
 
   constructor(private bs: BookmarksService, private router: Router) {}
@@ -46,7 +45,5 @@ export class BookmarkComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.bookmark = this.getCurrentBookmark();
-  }
+  ngOnInit(): void {}
 }
