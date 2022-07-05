@@ -11,6 +11,7 @@ import { Book } from 'src/app/models/book';
   styleUrls: ['./bookmark.component.scss'],
 })
 export class BookmarkComponent implements OnInit {
+  currentBookmark: Bookmark;
   books: Book[];
   comment: string;
 
@@ -23,14 +24,22 @@ export class BookmarkComponent implements OnInit {
 
   getCurrentBookmark(): Bookmark {
     var json = localStorage.getItem(CURRENT_BOOKMARK);
+
+    if (json === null) {
+      this.router.navigate(['/home']);
+    }
+
     return JSON.parse(json!) as Bookmark;
   }
 
   updateComment(): any {
     this.bs
-      .changeBookmarkComment(this.getCurrentBookmark().bookmarkId, this.comment)
+      .changeBookmarkComment(this.currentBookmark.bookmarkId, this.comment)
       .subscribe(
         (res: any) => {
+          this.bs
+            .getBookmarkById(this.currentBookmark.bookmarkId)
+            .then((data: Bookmark) => (this.currentBookmark = data));
           alert('Successfully updated');
         },
         (error: any) => {
@@ -39,11 +48,16 @@ export class BookmarkComponent implements OnInit {
       );
   }
 
-  getBooks(id: number): any {
-    this.bs.getBookmarkBooks(id).subscribe((res) => {
-      return (this.books = res as Book[]);
-    });
+  getBooks(): any {
+    this.bs
+      .getBookmarkBooks(this.currentBookmark.bookmarkId)
+      .subscribe((res) => {
+        return (this.books = res as Book[]);
+      });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.currentBookmark = this.getCurrentBookmark();
+    this.books = this.getBooks();
+  }
 }
