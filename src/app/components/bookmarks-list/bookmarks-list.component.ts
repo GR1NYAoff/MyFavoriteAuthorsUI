@@ -15,10 +15,14 @@ export class BookmarksListComponent implements OnInit {
   bookmark: Bookmark;
 
   ngOnInit(): void {
+    this.bs.refreshBookmarksList$
+    .subscribe(() => {
+      this.refreshList();
+    });
     this.refreshList();
   }
 
-  refreshList() {
+ private refreshList() {
     this.bs.getAvailableBookmarks().subscribe((res) => {
       this.bookmarks = res as Bookmark[];
     });
