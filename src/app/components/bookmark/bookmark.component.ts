@@ -43,13 +43,16 @@ export class BookmarkComponent implements OnInit {
       );
   }
 
-  getBooks(id: number): any {
-    this.bs.getBookmarkBooks(id).subscribe((res) => {
-      return (this.books = res as Book[]);
-    });
+  getBooks(): any {
+    this.bs
+      .getBookmarkBooks(this.currentBookmark.bookmarkId)
+      .subscribe((res) => {
+        return (this.books = res as Book[]);
+      });
   }
 
   ngOnInit(): void {
     this.currentBookmark = this.getCurrentBookmark();
+    this.books = this.getBooks();
   }
 }
