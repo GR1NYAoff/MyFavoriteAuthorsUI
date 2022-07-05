@@ -11,6 +11,7 @@ import { Book } from 'src/app/models/book';
   styleUrls: ['./bookmark.component.scss'],
 })
 export class BookmarkComponent implements OnInit {
+  currentBookmark: Bookmark;
   books: Book[];
   comment: string;
 
@@ -28,9 +29,12 @@ export class BookmarkComponent implements OnInit {
 
   updateComment(): any {
     this.bs
-      .changeBookmarkComment(this.getCurrentBookmark().bookmarkId, this.comment)
+      .changeBookmarkComment(this.currentBookmark.bookmarkId, this.comment)
       .subscribe(
         (res: any) => {
+          this.bs
+            .getBookmarkById(this.currentBookmark.bookmarkId)
+            .then((data: Bookmark) => (this.currentBookmark = data));
           alert('Successfully updated');
         },
         (error: any) => {
@@ -45,5 +49,7 @@ export class BookmarkComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.currentBookmark = this.getCurrentBookmark();
+  }
 }

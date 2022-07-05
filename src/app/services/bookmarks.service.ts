@@ -29,14 +29,14 @@ export class BookmarksService {
     return this.httpClient.get<Bookmark[]>(this.baseApiUrl);
   }
 
-  getBookmarkById(bookmarkId: number): Observable<Bookmark> {
+  getBookmarkById(bookmarkId: number): any {
     return this.httpClient
       .get<Bookmark>(`${this.baseApiUrl}/${bookmarkId}`)
       .pipe(
         tap((bookmark) =>
           localStorage.setItem(CURRENT_BOOKMARK, JSON.stringify(bookmark))
         )
-      );
+      ).toPromise();
   }
 
   getBookmarkBooks(bookmarkId: number): Observable<Book[]> {

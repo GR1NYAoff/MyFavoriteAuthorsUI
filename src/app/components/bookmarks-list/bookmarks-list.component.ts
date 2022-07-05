@@ -12,30 +12,26 @@ export class BookmarksListComponent implements OnInit {
   constructor(private bs: BookmarksService, private router: Router) {}
 
   bookmarks: Bookmark[];
-  bookmark: Bookmark;
 
   ngOnInit(): void {
-    this.bs.refreshBookmarksList$
-    .subscribe(() => {
+    this.bs.refreshBookmarksList$.subscribe(() => {
       this.refreshList();
     });
     this.refreshList();
   }
 
- private refreshList() {
+  private refreshList() {
     this.bs.getAvailableBookmarks().subscribe((res) => {
       this.bookmarks = res as Bookmark[];
     });
   }
 
-  getBookmark(id: number) {
-    this.bs.getBookmarkById(id).subscribe((res) => {
-      this.bookmark = res as Bookmark;
-    });
+  async getBookmark(id: number) {
+    await this.bs.getBookmarkById(id);
   }
 
-  selectBookmark(bookmarkId: number) {
-    this.getBookmark(bookmarkId);
+  async selectBookmark(bookmarkId: number) {
+    await this.getBookmark(bookmarkId);
     this.router.navigate([`/bookmark/${bookmarkId}`]);
   }
 
@@ -46,7 +42,6 @@ export class BookmarksListComponent implements OnInit {
         alert('Successfully deleted');
       },
       (error: any) => {
-        console.log(this.bookmark);
         alert('Error');
       }
     );
