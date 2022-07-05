@@ -11,7 +11,7 @@ const routes: Routes = [
   { path: 'bookmarks', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   {
-    path: 'bookmark/:bookmarkId',
+    path: 'bookmark',
     component: BookmarkComponent,
     canActivate: [AuthGuard],
   },

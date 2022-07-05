@@ -32,7 +32,7 @@ export class BookmarksListComponent implements OnInit {
 
   async selectBookmark(bookmarkId: number) {
     await this.getBookmark(bookmarkId);
-    this.router.navigate([`/bookmark/${bookmarkId}`]);
+    this.router.navigate([`/bookmark`]);
   }
 
   deleteBookmark(bookmarkId: number) {

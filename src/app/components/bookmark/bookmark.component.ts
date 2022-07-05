@@ -24,6 +24,11 @@ export class BookmarkComponent implements OnInit {
 
   getCurrentBookmark(): Bookmark {
     var json = localStorage.getItem(CURRENT_BOOKMARK);
+
+    if (json === null) {
+      this.router.navigate(['/home']);
+    }
+
     return JSON.parse(json!) as Bookmark;
   }
 
